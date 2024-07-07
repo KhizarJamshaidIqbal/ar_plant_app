@@ -56,7 +56,7 @@ class AdminController {
     required String temperature,
     required int humidity,
     required String size,
-    required String imageUrl,
+    required String imageUrl, required String category,
   }) async {
     try {
       await _firestore.collection('plants').add({

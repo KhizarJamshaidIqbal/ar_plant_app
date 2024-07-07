@@ -5,15 +5,24 @@ class ViewUsersScreen extends StatelessWidget {
   const ViewUsersScreen({super.key});
 
   Future<void> deleteUser(String userId) async {
-    await FirebaseFirestore.instance.collection('userProfiles').doc(userId).delete();
+    await FirebaseFirestore.instance
+        .collection('userProfiles')
+        .doc(userId)
+        .delete();
   }
 
   Future<void> restoreUser(Map<String, dynamic> user, String userId) async {
-    await FirebaseFirestore.instance.collection('userProfiles').doc(userId).set(user);
+    await FirebaseFirestore.instance
+        .collection('userProfiles')
+        .doc(userId)
+        .set(user);
   }
 
   Future<void> updateUserType(String userId, String newUserType) async {
-    await FirebaseFirestore.instance.collection('userProfiles').doc(userId).update({'userType': newUserType});
+    await FirebaseFirestore.instance
+        .collection('userProfiles')
+        .doc(userId)
+        .update({'userType': newUserType});
   }
 
   @override
@@ -23,7 +32,8 @@ class ViewUsersScreen extends StatelessWidget {
         title: const Text('All Users'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('userProfiles').snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('userProfiles').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
@@ -80,10 +90,16 @@ class ViewUsersScreen extends StatelessWidget {
                   child: ExpansionTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.green,
-                      child: Text(
-                        user['name'][0],
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                      child: user['profileImage'] != null
+                          ? CircleAvatar(
+                              radius: 60,
+                              backgroundImage:
+                                  NetworkImage(user['profileImage']),
+                            )
+                          : Text(
+                              user['name'][0],
+                              style: const TextStyle(color: Colors.white),
+                            ),
                     ),
                     title: Text(user['name'] ?? 'No Name'),
                     subtitle: Text(user['email'] ?? 'No Email'),

@@ -41,6 +41,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
   }
 
   String? _selectedCategory;
+  //category
   final List<String> _categories = ['Indoor', 'Outdoor', 'Garden', 'Supplement'];
 
   @override
@@ -226,6 +227,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
                           humidity: int.parse(humidityController.text),
                           size: sizeController.text,
                           imageUrl: imageUrl!,
+                          category: _selectedCategory!,
                         );
                       } else {
                         // Validation failed or no image selected

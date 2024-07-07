@@ -30,7 +30,8 @@ class AuthController {
         'uid': userCredential.user?.uid,
         'email': email,
         'name': name,
-        'userType': "customer"
+        'userType': "customer",
+        'profileImage': ''
       });
       await userCredential.user?.reload();
       Utils.snackBar("SignUp Success", context);

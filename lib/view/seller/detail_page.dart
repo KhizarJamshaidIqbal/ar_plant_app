@@ -1,4 +1,5 @@
 import 'package:ar_base_plant_app/utils/app_size.dart';
+import 'package:ar_base_plant_app/view/seller/order_screen.dart';
 import 'package:flutter/material.dart';
 import '../../model/plants.dart';
 import '../../utils/constants.dart';
@@ -295,23 +296,35 @@ class _DetailPageState extends State<DetailPage> {
               width: 20,
             ),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Constants.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: const Offset(0, 1),
-                        blurRadius: 5,
-                        color: Constants.primaryColor.withOpacity(.3),
-                      )
-                    ]),
-                child: const Center(
-                  child: Text(
-                    'BUY NOW',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderScreen(
+                        plantId: widget.plantId.toString(),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Constants.primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(0, 1),
+                          blurRadius: 5,
+                          color: Constants.primaryColor.withOpacity(.3),
+                        )
+                      ]),
+                  child: const Center(
+                    child: Text(
+                      'BUY NOW',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                 ),

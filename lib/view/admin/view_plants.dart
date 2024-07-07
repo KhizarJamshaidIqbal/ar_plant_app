@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 class ViewPlantsScreen extends StatelessWidget {
   const ViewPlantsScreen({super.key});
 
+  Future<void> updateCategory(String plantId, String newCategory) async {
+    await FirebaseFirestore.instance.collection('plants').doc(plantId).update({'category': newCategory});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +26,7 @@ class ViewPlantsScreen extends StatelessWidget {
             itemCount: plants.length,
             itemBuilder: (context, index) {
               final plant = plants[index].data() as Map<String, dynamic>;
+              final plantId = plants[index].id;
               return Container(
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
@@ -31,23 +36,50 @@ class ViewPlantsScreen extends StatelessWidget {
                 child: ExpansionTile(
                   childrenPadding: const EdgeInsets.all(16.0),
                   backgroundColor: Colors.green.withOpacity(0.1),
-                  title: Text(plant['name'] ?? 'No Plant Name'),
-                  subtitle: Text(plant['description'] ?? 'No Description'),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(plant['name'] ?? 'No Plant Name'),
+                      PopupMenuButton<String>(
+                        icon: const Icon(Icons.edit),
+                        onSelected: (value) async {
+                          await updateCategory(plantId, value);
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            value: 'Indoor',
+                            child: Text('Indoor'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Outdoor',
+                            child: Text('Outdoor'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Garden',
+                            child: Text('Garden'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Supplement',
+                            child: Text('Supplement'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(plant['image_url']),
                   ),
                   children: [
                     const Text(
                       'Plant Information',
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
-                    50.h,
+                    SizedBox(height: 50),
                     CircleAvatar(
                       radius: 50,
                       backgroundImage: NetworkImage(plant['image_url']),
                     ),
-                    50.h,
+                    SizedBox(height: 50),
                     ListTile(
                       leading: const Icon(Icons.description),
                       title: Text('Description: ${plant['description']}'),
@@ -71,6 +103,16 @@ class ViewPlantsScreen extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.thermostat),
                       title: Text('Temperature: ${plant['temperature']}'),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.category),
+                      title: Row(
+                        children: [
+                          const Icon(Icons.category),
+                          const SizedBox(width: 8.0),
+                          Text('Category: ${plant['category']}'),
+                        ],
+                      ),
                     ),
                   ],
                 ),

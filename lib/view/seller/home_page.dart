@@ -92,22 +92,28 @@ class PlantList extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 height: 50.0,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: plantList
-                      .length, // Adjust this according to your categories
+                  itemCount:
+                      Set<String>.from(plantList.map((plant) => plant.category))
+                          .length,
                   itemBuilder: (BuildContext context, int index) {
+                    String category = Set<String>.from(
+                            plantList.map((plant) => plant.category))
+                        .toList()[index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
                           // Handle category selection
+                          print('Selected category: $category');
+                          // Implement your logic here
                         },
                         child: Text(
-                          plantList[index].category, // Display category names
+                          category, // Display category names
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
@@ -142,6 +148,18 @@ class PlantList extends StatelessWidget {
                         // ignore: sort_child_properties_last
                         child: Stack(
                           children: [
+                            // Plant image
+                            Positioned(
+                              left: 50,
+                              right: 50,
+                              top: 50,
+                              bottom: 50,
+                              child: Image.network(
+                                plantList[index].imageURL,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            //Favorite button
                             Positioned(
                               top: 10,
                               right: 20,
@@ -167,16 +185,7 @@ class PlantList extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Positioned(
-                              left: 50,
-                              right: 50,
-                              top: 50,
-                              bottom: 50,
-                              child: Image.network(
-                                plantList[index].imageURL,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                            // Plant details
                             Positioned(
                               bottom: 15,
                               left: 20,
@@ -201,6 +210,7 @@ class PlantList extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            // Price
                             Positioned(
                               bottom: 15,
                               right: 20,
