@@ -10,7 +10,7 @@
 analyzer:
   errors:
     camel_case_types: ignore
-    file_names: ignore ignore ignore ignore
+    file_names: ignore ignore ignore ignore ignore
     library_private_types_in_public_api: ignore
     must_be_immutable: ignore
     no_leading_underscores_for_local_identifiers: ignore

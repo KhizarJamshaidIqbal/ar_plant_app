@@ -1,4 +1,4 @@
-import 'package:ar_base_plant_app/utils/app_size.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -74,12 +74,12 @@ class ViewPlantsScreen extends StatelessWidget {
                       'Plant Information',
                       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     CircleAvatar(
                       radius: 50,
                       backgroundImage: NetworkImage(plant['image_url']),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     ListTile(
                       leading: const Icon(Icons.description),
                       title: Text('Description: ${plant['description']}'),
