@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -109,7 +110,9 @@ class PlantList extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           // Handle category selection
-                          print('Selected category: $category');
+                          if (kDebugMode) {
+                            print('Selected category: $category');
+                          }
                           // Implement your logic here
                         },
                         child: Text(

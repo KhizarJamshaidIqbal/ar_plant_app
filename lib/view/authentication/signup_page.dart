@@ -8,7 +8,7 @@ import '../../utils/constants.dart';
 import '../../widgets/custom_textfield.dart';
 
 class SignUp extends StatefulWidget {
-  SignUp({Key? key}) : super(key: key);
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -26,7 +26,6 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     fullName.dispose();
     email.dispose();
@@ -139,8 +138,8 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Expanded(child: Divider()),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),

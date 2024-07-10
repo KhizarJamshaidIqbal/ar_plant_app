@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, constant_identifier_names
+// ignore_for_file: use_build_context_synchronously, constant_identifier_names, file_names
 import 'package:ar_base_plant_app/utils/utils.dart';
 import 'package:ar_base_plant_app/view/admin/dashboard_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

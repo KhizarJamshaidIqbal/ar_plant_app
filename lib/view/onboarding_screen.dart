@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';

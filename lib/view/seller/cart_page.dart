@@ -1,6 +1,6 @@
+import 'package:ar_base_plant_app/model/plants.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/plants.dart';
 import '../../utils/constants.dart';
 import '../../widgets/plant_widget.dart';
 

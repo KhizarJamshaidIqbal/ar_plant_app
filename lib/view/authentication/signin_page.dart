@@ -21,7 +21,6 @@ class _SignInState extends State<SignIn> {
   final formkey = GlobalKey<FormState>();
     @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     email.dispose();
     password.dispose();
@@ -192,7 +191,7 @@ class _SignInState extends State<SignIn> {
                     Navigator.pushReplacement(
                         context,
                         PageTransition(
-                            child: SignUp(),
+                            child: const SignUp(),
                             type: PageTransitionType.bottomToTop));
                   },
                   child: Center(

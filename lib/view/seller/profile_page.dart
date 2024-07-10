@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:ar_base_plant_app/view/authentication/signin_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
@@ -195,11 +198,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         //   androidAppId: "com.sharasol.PKR_Fake_Check_Guide",
                         // );
                         try {
-                          StoreRedirect.redirect(
-                              androidAppId: "com.iyaffle.rangoli",
-                              iOSAppId: "585027354");
+                          Share.share(
+                              "https://play.google.com/store/apps/details?id=com.sharasol.PKR_Fake_Check_Guide");
                         } catch (e) {
-                          print(e);
+                          if (kDebugMode) {
+                            print(e.toString());
+                          }
                         }
                       },
                       child: const ProfileWidget(
@@ -208,14 +212,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     InkWell(
-                       onTap: () async {
-                  try {
-                    Share.share(
-                        "https://play.google.com/store/apps/details?id=com.sharasol.PKR_Fake_Check_Guide");
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
+                      onTap: () async {
+                        try {
+                          StoreRedirect.redirect(
+                              androidAppId: "com.iyaffle.rangoli",
+                              iOSAppId: "585027354");
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        }
+                      },
                       child: const ProfileWidget(
                         icon: Icons.star,
                         title: 'Rate Us',

@@ -19,52 +19,6 @@ class _ScanPageState extends State<ScanPage> {
       body: Stack(
         children: [
           Positioned(
-              top: 50,
-              left: 20,
-              right: 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Constants.primaryColor.withOpacity(.15),
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        color: Constants.primaryColor,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      debugPrint('favorite');
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Constants.primaryColor.withOpacity(.15),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.share,
-                          color: Constants.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-          Positioned(
             top: 100,
             right: 20,
             left: 20,
