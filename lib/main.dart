@@ -1,9 +1,4 @@
 import 'package:ar_base_plant_app/firebase_options.dart';
-import 'package:ar_base_plant_app/view/admin/dashboard_screen.dart';
-import 'package:ar_base_plant_app/view/seller/home_page.dart';
-import 'package:ar_base_plant_app/view/seller/profile_page.dart';
-import 'package:ar_base_plant_app/view/seller/scan_page.dart';
-import 'package:ar_base_plant_app/view/seller/set_values.dart';
 import 'package:ar_base_plant_app/view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home:  SetValuesForm(),
+      home:  const SplashScreen(),
     );
   }
 }
