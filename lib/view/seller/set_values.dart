@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../../utils/constants.dart';
 
@@ -21,6 +22,9 @@ class _SetValuesFormState extends State<SetValuesForm> {
       TextEditingController();
   final TextEditingController _minSoilMoistureController =
       TextEditingController();
+
+  final DatabaseReference _database =
+      FirebaseDatabase.instance.ref('Set_Values');
 
   @override
   void dispose() {
@@ -44,6 +48,80 @@ class _SetValuesFormState extends State<SetValuesForm> {
       contentPadding:
           const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
     );
+  }
+
+  void _saveValues() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Constants.primaryColor,
+          content: const Center(
+            child: Text(
+              'Processing Data',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.0,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      // Save values to Firebase
+      _database.set({
+        'maxTemperature': _maxTempController.text,
+        'minTemperature': _minTempController.text,
+        'maxHumidity': _maxHumidityController.text,
+        'minHumidity': _minHumidityController.text,
+        'maxSoilMoisture': _maxSoilMoistureController.text,
+        'minSoilMoisture': _minSoilMoistureController.text,
+      }).then((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Constants.primaryColor,
+            content: const Center(
+              child: Text(
+                'Data Saved Successfully',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0,
+                ),
+              ),
+            ),
+          ),
+        );
+      }).catchError((error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Center(
+              child: Text(
+                'Failed to Save Data',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0,
+                ),
+              ),
+            ),
+          ),
+        );
+      });
+
+      if (kDebugMode) {
+        print('Max Temperature: ${_maxTempController.text}');
+        print('Min Temperature: ${_minTempController.text}');
+        print('Max Humidity: ${_maxHumidityController.text}');
+        print('Min Humidity: ${_minHumidityController.text}');
+        print('Max Soil Moisture: ${_maxSoilMoistureController.text}');
+        print('Min Soil Moisture: ${_minSoilMoistureController.text}');
+      }
+    }
   }
 
   @override
@@ -197,35 +275,7 @@ class _SetValuesFormState extends State<SetValuesForm> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: Constants.primaryColor,
-                                  content: const Center(
-                                    child: Text(
-                                      'Processing Data',
-                                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 1.0,),
-                                    ),
-                                  ),
-                                ),
-                              );
-                              if (kDebugMode) {
-                                print(
-                                    'Max Temperature: ${_maxTempController.text}');
-                                print(
-                                    'Min Temperature: ${_minTempController.text}');
-                                print(
-                                    'Max Humidity: ${_maxHumidityController.text}');
-                                print(
-                                    'Min Humidity: ${_minHumidityController.text}');
-                                print(
-                                    'Max Soil Moisture: ${_maxSoilMoistureController.text}');
-                                print(
-                                    'Min Soil Moisture: ${_minSoilMoistureController.text}');
-                              }
-                            }
-                          },
+                          onPressed: _saveValues,
                           child: const Text('Submit',
                               style: TextStyle(
                                 fontSize: 18,

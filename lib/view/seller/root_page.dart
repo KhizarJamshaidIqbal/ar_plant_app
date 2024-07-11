@@ -2,8 +2,8 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:ar_base_plant_app/view/seller/cart_page.dart';
 import 'package:ar_base_plant_app/view/seller/favorite_page.dart';
 import 'package:ar_base_plant_app/view/seller/home_page.dart';
+import 'package:ar_base_plant_app/view/seller/predict_screen.dart';
 import 'package:ar_base_plant_app/view/seller/profile_page.dart';
-import 'package:ar_base_plant_app/view/seller/set_values.dart';
 import 'package:flutter/material.dart';
 
 import 'package:page_transition/page_transition.dart';
@@ -88,7 +88,7 @@ class _RootPageState extends State<RootPage> {
           Navigator.push(
               context,
               PageTransition(
-                  child: SetValuesForm(),
+                  child: PredictScreen(),
                   type: PageTransitionType.bottomToTop));
         },
         backgroundColor: Constants.primaryColor,
